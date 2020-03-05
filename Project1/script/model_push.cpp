@@ -1,3 +1,5 @@
+// Sample code taken from Gazebo model plugin tutorial: http://gazebosim.org/tutorials?tut=plugins_model&cat=write_plugin
+
 #include <functional>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
