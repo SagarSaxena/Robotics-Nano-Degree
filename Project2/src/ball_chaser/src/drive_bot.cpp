@@ -2,51 +2,65 @@
 #include "geometry_msgs/Twist.h"
 #include "ball_chaser/DriveToTarget.h"
 
-// ROS::Publisher motor commands;
-ros::Publisher motor_command_publisher;
 
-// handle_drive_request callback function that executes whenever a drive_bot service is requested
-// This function publishes the requested linear x and angular velocities to the robot wheel joints
-// After publishing the requested velocities, a message feedback is returned with the requested wheel velocities
-
-bool handle_drive_request(ball_chaser::DriveToTarget::Request& req, ball_chaser::DriveToTarget::Response& res)
+class SubscribeAndPublish
 {
-	ROS_INFO("DriveToTargetRequest received - linear_x:%1.2f, angular_z:%1.2f", (float)req.linear_x, (float)req.angular_z);
+public:
+  SubscribeAndPublish()
+  {
+    // Inform ROS master that we will be publishing a message of type geometry_msgs::Twist on the robot actuation topic with a publishing queue size of 10
+    motor_command_publisher_ = n_.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
+  }
 
-        // Create a motor_command object of type geometry_msgs::Twist
-        geometry_msgs::Twist motor_command;
+  ros::NodeHandle n() {
+    return n_;
+  }
 
-        // Set wheel velocities, to requested values
-        motor_command.linear.x = req.linear_x;
-        motor_command.angular.z = req.angular_z;
+  // handle_drive_request callback function that executes whenever a drive_bot service is requested
+  // This function publishes the requested linear x and angular velocities to the robot wheel joints
+  // After publishing the requested velocities, a message feedback is returned with the requested wheel velocities
 
-        // Publish angles to drive the robot
-        motor_command_publisher.publish(motor_command);
+  bool handle_drive_request(ball_chaser::DriveToTarget::Request& req, ball_chaser::DriveToTarget::Response& res)  
+  {
+    ROS_INFO("DriveToTargetRequest received - linear_x:%1.2f, angular_z:%1.2f", (float)req.linear_x, (float)req.angular_z);
 
-	// Return a response message
-	res.msg_feedback = "Velocities set to - linear_x: " + std::to_string(motor_command.linear.x) + " angular_z: " + std::to_string(motor_command.angular.z);
-	ROS_INFO_STREAM(res.msg_feedback);
+    // Create a motor_command object of type geometry_msgs::Twist
+    geometry_msgs::Twist motor_command;
 
-	return true;
-}
+    // Set wheel velocities, to requested values
+    motor_command.linear.x = req.linear_x;
+    motor_command.angular.z = req.angular_z;
+
+    // Publish angles to drive the robot
+    motor_command_publisher_.publish(motor_command);
+
+    // Return a response message
+    res.msg_feedback = "Velocities set to - linear_x: " + std::to_string(motor_command.linear.x) + " angular_z: " + std::to_string(motor_command.angular.z);
+    ROS_INFO_STREAM(res.msg_feedback);
+
+    return true;
+  }
+
+private:
+  ros::NodeHandle n_; 
+  ros::Publisher motor_command_publisher_;
+
+}; //End of class SubscribeAndPublish
 
 
 int main(int argc, char** argv)
 {
-    // Initialize a ROS node
-    ros::init(argc, argv, "drive_bot");
+  // Initialize a ROS node
+  ros::init(argc, argv, "drive_bot");
 
-    // Create a ROS NodeHandle object
-    ros::NodeHandle n;
+  // Create Sub/Pub object
+  SubscribeAndPublish SAPObject;
 
-    // Inform ROS master that we will be publishing a message of type geometry_msgs::Twist on the robot actuation topic with a publishing queue size of 10
-    motor_command_publisher = n.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
+  // Define a drive /ball_chaser/command_robot service with a handle_drive_request callback function. See http://wiki.ros.org/roscpp/Overview/Services section 3.3.2 for syntax
+  ros::ServiceServer service = SAPObject.n().advertiseService("/ball_chaser/command_robot", &SubscribeAndPublish::handle_drive_request, &SAPObject);
 
-    // Define a drive /ball_chaser/command_robot service with a handle_drive_request callback function
-    ros::ServiceServer service = n.advertiseService("/ball_chaser/command_robot", handle_drive_request);
+  // Handle ROS communication events
+  ros::spin();
 
-    // Handle ROS communication events
-    ros::spin();
-
-    return 0;
+  return 0;
 }
