@@ -2,41 +2,23 @@
 #include "ball_chaser/DriveToTarget.h"
 #include <sensor_msgs/Image.h>
 
-
-#define CMD_ANGULAR_VELOCITY 1.0
-#define CMD_LINEAR_VELOCITY 1.0
-
-// Define a global client that can request services
-ros::ServiceClient client;
-
-// This function calls the command_robot service to drive the robot in the specified direction
-void drive_robot(float lin_x, float ang_z)
+class SubscribeAndPublish
 {
-    // Request a service and pass the velocities to it to drive the robot
-    ball_chaser::DriveToTarget srv;
-    srv.request.linear_x = lin_x;
-    srv.request.angular_z = ang_z;
+public:
+  SubscribeAndPublish()
+  {
+    // Subscribe to /camera/rgb/image_raw topic to read the image data inside the process_image_callback function
+    sub1_ = n_.subscribe("/camera/rgb/image_raw", 10, &SubscribeAndPublish::process_image_callback, this);
 
-    // Call the DriveToTarget service and pass the request velocities
-    	if (!client.call(srv))
-        	ROS_ERROR("Failed to call service DriveToTarget");
+    // Define a client service capable of requesting services from command_robot
+    client_ = n_.serviceClient<ball_chaser::DriveToTarget>("/ball_chaser/command_robot");
+  }
 
-}
+  // This callback function continuously executes and reads the image data, looks for a white ball and command the robot to move towards it
+  void process_image_callback(const sensor_msgs::Image img)
+  {
 
-// This callback function continuously executes and reads the image data
-void process_image_callback(const sensor_msgs::Image img)
-{
-
-    int white_pixel = 255;
-    bool ball_found = false;
-    float linear_vel;
-    float angular_vel;
-
-    // TODO: Loop through each pixel in the image and check if there's a bright white one
-    // Then, identify if this pixel falls in the left, mid, or right side of the image
-    // Depending on the white ball position, call the drive_bot function and pass velocities to it
-    // Request a stop when there's no white ball seen by the camera
-    
+    // loop through image to identify first (if any) white pixels  
     int pixel_index = 0;
     for (; pixel_index < img.height*img.step; pixel_index++) {
       if (img.data[pixel_index] == white_pixel) {
@@ -46,44 +28,61 @@ void process_image_callback(const sensor_msgs::Image img)
       }
     }
 
-
+    // drive robot based on position of found white pixel
     if (ball_found == true) {
-        if (pixel_index % img.step < (img.step/3)) {
-	    // turn left
-            linear_vel = 0;
-	    angular_vel = CMD_ANGULAR_VELOCITY;
-        }
-        else if (pixel_index % img.step < (img.step/3*2)) {
-            // go stright
-            linear_vel = CMD_LINEAR_VELOCITY;
-	    angular_vel = 0;
-        }
-        else {
-            // turn right
-            linear_vel = 0;
-	    angular_vel = -CMD_ANGULAR_VELOCITY;
-        } 
+        if (pixel_index % img.step < (img.step/3)) 
+
+	    drive_robot(0, cmd_angular_vel);			// turn left
+
+        else if (pixel_index % img.step < (img.step/3*2)) 
+            
+            drive_robot(cmd_linear_vel, cmd_angular_vel);	// go stright
+            
+        else 
+            
+	    drive_robot(0, -cmd_angular_vel);			// turn right
+        
     }
     else {
-            // stop
-            linear_vel = 0;
-	    angular_vel = 0;
+            drive_robot(0,0);					// stop
     }
 
-    drive_robot(linear_vel, angular_vel);
-}
+  }
+
+private:
+
+  ros::ServiceClient client_;
+  ros::NodeHandle n_; 
+  ros::Subscriber sub1_;
+
+  int white_pixel = 255;
+  bool ball_found = false;
+  const float cmd_linear_vel = 1.0;
+  const float cmd_angular_vel = 1.0;
+
+  // This function calls the command_robot service to drive the robot in the specified direction
+  void drive_robot(float lin_x, float ang_z)
+  {
+    // Request a service and pass the velocities to it to drive the robot
+    ball_chaser::DriveToTarget srv;
+    srv.request.linear_x = lin_x;
+    srv.request.angular_z = ang_z;
+
+    // Call the DriveToTarget service and pass the request velocities
+    	if (!client_.call(srv))
+        	ROS_ERROR("Failed to call service DriveToTarget");
+  }
+
+}; //End of class SubscribeAndPublish
+
 
 int main(int argc, char** argv)
 {
     // Initialize the process_image node and create a handle to it
     ros::init(argc, argv, "process_image");
-    ros::NodeHandle n;
 
-    // Define a client service capable of requesting services from command_robot
-    client = n.serviceClient<ball_chaser::DriveToTarget>("/ball_chaser/command_robot");
-
-    // Subscribe to /camera/rgb/image_raw topic to read the image data inside the process_image_callback function
-    ros::Subscriber sub1 = n.subscribe("/camera/rgb/image_raw", 10, process_image_callback);
+    // Create a Sub/Pub objects
+    SubscribeAndPublish SAPObject;
 
     // Handle ROS communication events
     ros::spin();
