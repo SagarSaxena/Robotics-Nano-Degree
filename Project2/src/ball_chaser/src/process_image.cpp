@@ -2,6 +2,10 @@
 #include "ball_chaser/DriveToTarget.h"
 #include <sensor_msgs/Image.h>
 
+
+#define CMD_ANGULAR_VELOCITY 1.0
+#define CMD_LINEAR_VELOCITY 1.0
+
 // Define a global client that can request services
 ros::ServiceClient client;
 
@@ -47,17 +51,17 @@ void process_image_callback(const sensor_msgs::Image img)
         if (pixel_index % img.step < (img.step/3)) {
 	    // turn left
             linear_vel = 0;
-	    angular_vel = 0.5;
+	    angular_vel = CMD_ANGULAR_VELOCITY;
         }
         else if (pixel_index % img.step < (img.step/3*2)) {
             // go stright
-            linear_vel = 0.5;
+            linear_vel = CMD_LINEAR_VELOCITY;
 	    angular_vel = 0;
         }
         else {
             // turn right
             linear_vel = 0;
-	    angular_vel = -0.5;
+	    angular_vel = -CMD_ANGULAR_VELOCITY;
         } 
     }
     else {
