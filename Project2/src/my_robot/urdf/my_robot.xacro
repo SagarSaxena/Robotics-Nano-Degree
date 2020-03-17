@@ -1,5 +1,9 @@
 <?xml version='1.0'?>
 
+<!-- Per the bug described here: https://bitbucket.org/osrf/sdformat/issues/132/parser-does-not-handle-urdf-material, the name attribute was removed from tags.
+This allows colors to be applied to the links -->
+
+
 <robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:include filename="$(find my_robot)/urdf/my_robot.gazebo" />
@@ -25,19 +29,89 @@
       />
     </inertial>
 
-    <collision name='collision'>
+    <collision name='chassis_bottom'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/> 
       <geometry>
-        <box size=".4 .2 .1"/>
+        <box size=".4 .3 .05"/>
       </geometry>
     </collision>
 
-    <visual name='chassis_visual'>
+    <!--  name='chassis_bottom_visual' -->
+    <visual>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
-        <box size=".4 .2 .1"/>
+        <box size=".4 .3 .05"/>
       </geometry> 
     </visual>
+
+    <collision name='chassis_top'>
+      <origin xyz="0 0 0.2" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size=".4 .3 .05"/>
+      </geometry>
+    </collision>
+
+    <!--  name='chassis_top_visual' -->
+    <visual>
+      <origin xyz="0 0 0.2" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size=".4 .3 .05"/>
+      </geometry>
+    </visual>
+
+    <!-- Support posts -->
+
+    <!--  name='post_FL_visual' -->
+    <visual>
+      <origin xyz="0.18 0.13 0.1" rpy=" 0 0 0"/> 
+      <geometry>
+        <cylinder length="0.2" radius="0.01"/>
+      </geometry>
+    </visual>
+
+    <!--  name='post_FR_visual' -->
+    <visual>
+      <origin xyz="0.18 -0.13 0.1" rpy=" 0 0 0"/> 
+      <geometry>
+        <cylinder length="0.2" radius="0.01"/>
+      </geometry>
+    </visual>
+
+    <!--  name='post_BL_visual' -->
+    <visual>
+      <origin xyz="-0.18 0.13 0.1" rpy=" 0 0 0"/> 
+      <geometry>
+        <cylinder length="0.2" radius="0.01"/>
+      </geometry>
+    </visual>
+
+    <!--  name='post_BR_visual' -->
+    <visual>
+      <origin xyz="-0.18 -0.13 0.1" rpy=" 0 0 0"/> 
+      <geometry>
+        <cylinder length="0.2" radius="0.01"/>
+      </geometry>
+    </visual>
+
+    <collision name='posts_collision'>
+      <origin xyz="0 0 0.1" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size=".4 .3 .2"/>
+      </geometry>
+    </collision>    
+
+
+    <!-- camera mount -->
+
+    <!--  name='camera_mount_visual' -->
+    <visual>
+      <origin xyz="0.17 0 0.055" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size=".01 .06 .06"/>
+      </geometry>
+    </visual>
+
+    <!-- casters -->
 
     <collision name='back_caster_collision'>
       <origin xyz="-0.15 0 -0.05" rpy=" 0 0 0"/>
@@ -46,6 +120,7 @@
       </geometry>
     </collision>
 
+    <!--  name='back_caster_visual' -->
     <visual name='back_caster_visual'>
       <origin xyz="-0.15 0 -0.05" rpy=" 0 0 0"/>
       <geometry>
@@ -60,6 +135,7 @@
       </geometry>
     </collision>
 
+    <!--  name='front_caster_visual' -->
     <visual name='front_caster_visual'>
       <origin xyz="0.15 0 -0.05" rpy=" 0 0 0"/>
       <geometry>
@@ -68,6 +144,8 @@
     </visual>
 
   </link>
+
+  <!-- wheels -->
 
   <link name='left_wheel'>
 
@@ -124,6 +202,8 @@
     </visual>
 
   </link>
+
+ <!-- Sensors -->
 
   <link name='camera'>
 
@@ -186,7 +266,7 @@
   </link>
 
    <joint type="continuous" name="left_wheel_hinge">
-    <origin xyz="0 0.15 0" rpy="0 0 0"/>
+    <origin xyz="0 0.18 0" rpy="0 0 0"/>
     <child link="left_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -195,7 +275,7 @@
   </joint>
 
    <joint type="continuous" name="right_wheel_hinge">
-    <origin xyz="0 -0.15 0" rpy="0 0 0"/>
+    <origin xyz="0 -0.18 0" rpy="0 0 0"/>
     <child link="right_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -204,14 +284,14 @@
   </joint>
 
    <joint type="fixed" name="camera_joint">
-    <origin xyz="0.2 0 0" rpy="0 0 0"/>
+    <origin xyz="0.2 0 0.055" rpy="0 0 0"/>
     <child link="camera"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
   </joint>
 
    <joint type="fixed" name="hokuyo_joint">
-    <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
+    <origin xyz="0.15 0 0.26" rpy="0 0 0"/>
     <child link="hokuyo"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
