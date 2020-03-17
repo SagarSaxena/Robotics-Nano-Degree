@@ -21,11 +21,16 @@ public:
     // loop through image to identify first (if any) white pixels  
     int pixel_index = 0;
     for (; pixel_index < img.height*img.step; pixel_index++) {
-      if (img.data[pixel_index] == white_pixel) {
+
+      // all 3 channels (RGB) have to be 255 to recognize a white pixel
+      if ((img.data[pixel_index] & img.data[pixel_index+1] & img.data[pixel_index+2])  == white_pixel) {
         ball_found = true;
 	ROS_INFO_STREAM("Yes!");
 	break; 
       }
+
+      else
+        ball_found = false;
     }
 
     // drive robot based on position of found white pixel
