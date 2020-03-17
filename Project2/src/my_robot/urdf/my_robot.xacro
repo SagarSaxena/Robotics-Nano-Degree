@@ -129,7 +129,7 @@
 
     <inertial>
       <mass value="0.1"/>
-      <origin xyz="0.05 0.05 0.05" rpy=" 0 0 0"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <inertia
           ixx="1e-6" ixy="0" ixz="0"
           iyy="1e-6" iyz="0"
@@ -150,6 +150,10 @@
         <box size=".05 .05 .05"/>
       </geometry>
     </visual>
+
+    <box_inertia sizeX="0.05" sizeY="0.05" sizeZ="0.05" mass="0.1">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </box_inertia>
 
   </link>
 
