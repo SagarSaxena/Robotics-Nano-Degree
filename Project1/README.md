@@ -23,6 +23,6 @@ Navigate to the world directory and launch `myWorld`:
 $ cd ~/RoboNDProjects/Project1/world/
 $ gazebo myWorld
 ```
-A gazebo world modelled after my apartment should launch, with some robots scatted through the environment.
+A gazebo world modelled after my apartment will launch, with some robots scattered through out the environment.
 
 One of the robots will move in a straight line until colliding with a wall, and a welcome message will be displayed on the terminal. Both actions are implemented as Gazebo plugins.
