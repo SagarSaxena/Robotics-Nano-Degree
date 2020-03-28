@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<!-- Map Server -->
+	<arg name="map_file" default="$(find my_robot)/maps/map.yaml"/>
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+	 <!-- AMCL Node -->
+  	<node name="amcl" pkg="amcl" type="amcl" output="screen">
+		<!-- <remap from="scan" to="my_robot/laser/scan"/> -->
+  		<param name="odom_frame_id" value="odom"/>
+  		<param name="odom_model_type" value="diff-corrected"/>
+  		<param name="base_frame_id" value="robot_footprint"/>
+  		<param name="global_frame_id" value="map"/>
+		<param name="transform_tolerance" value="0.2"/>
+
+    		<!-- define initial pose here -->
+    		<param name="initial_pose_x" value="0.0"/>
+    		<param name="initial_pose_y" value="0.0"/>
+
+		<!-- Filter Parameters -->
+		<param name="max_particles" value="100"/>
+		<param name="max_particles" value="3000"/>
+		<param name="update_min_d" value="0.1"/>
+		<param name="update_min_a" value="0.175"/>	
+		
+
+		<!-- Laser Parameters -->
+		<param name="laser_min_range" value="0.01"/>
+		<param name="laser_max_range" value="10"/>		
+		<param name="laser_max_beams" value="500"/>	
+		<param name="laser_z_hit" value="0.99"/>		
+		<param name="laser_z_rand" value="0.01"/>	
+
+ 	</node>
+
+</launch>
