@@ -3,8 +3,14 @@
 <launch>
 
  <!-- Robot pose -->
+  <!--
   <arg name="x" default="1"/>
   <arg name="y" default="-5"/>
+  -->
+
+  <arg name="x" default="-3"/>
+  <arg name="y" default="-3"/>
+
   <arg name="z" default="0"/>
   <arg name="roll" default="0"/>
   <arg name="pitch" default="0"/>
@@ -14,7 +20,8 @@
   <include file="$(find my_robot)/launch/robot_description.launch"/>
 
   <!-- World File -->
-  <arg name="world_file" default="$(find my_robot)/worlds/myWorld.world"/>
+  <!-- <arg name="world_file" default="$(find my_robot)/worlds/myWorld.world"/> -->
+  <arg name="world_file" default="$(find my_robot)/worlds/udacity_mtv"/>
 
   <!-- Launch Gazebo World -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -32,7 +39,10 @@
               -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>  
 
   <!--launch rviz-->
-  <node name="rviz" pkg="rviz" type="rviz" respawn="false"/>
+  <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find my_robot)/WhereAmI.rviz"/>
+
+
+
 
 
 </launch>
