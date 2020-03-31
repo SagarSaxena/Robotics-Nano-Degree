@@ -9,26 +9,18 @@
 
 	 <!-- AMCL Node -->
   	<node name="amcl" pkg="amcl" type="amcl" output="screen">
-		<!-- <remap from="scan" to="my_robot/laser/scan"/> -->
 
 
     		<!-- define initial pose here -->
-    		<param name="initial_pose_x" value="-33"/>
-    		<param name="initial_pose_y" value="-3"/>
-  		<param name="initial_pose_a" value="1.5708"/>
-
-
-		<!-- Filter Parameters -->
-		<param name="min_particles" value="100"/>
-		<param name="max_particles" value="2000"/>
-
 		<!--
-		<param name="initial_cov_xx" value="3"/>
-		<param name="initial_cov_yy" value="3"/>
-		<param name="initial_cov_aa" value="1.5708"/> -->
+    		<param name="initial_pose_x" value="1"/>
+    		<param name="initial_pose_y" value="-5"/>
+  		<param name="initial_pose_a" value="1.57"/>
+		-->
 
-		<!-- <param name="update_min_d" value="0.01"/> 
-		<param name="update_min_a" value="0.175"/>	-->
+    		<param name="initial_pose_x" value="-1"/>
+    		<param name="initial_pose_y" value="-5"/>
+  		<param name="initial_pose_a" value="1.57"/>
 
 
 		<!-- Odom Parameters -->		
@@ -36,23 +28,42 @@
   		<param name="odom_model_type" value="diff-corrected"/>
   		<param name="base_frame_id" value="robot_footprint"/>
   		<param name="global_frame_id" value="map"/>
-		<!-- <param name="transform_tolerance" value="0.2"/> -->
 
-		<!--
-		<param name="odom_alpha1" value="0.002"/>
-		<param name="odom_alpha2" value="0.002"/>
-		<param name="odom_alpha3" value="0.002"/>
-		<param name="odom_alpha4" value="0.002"/> -->
+
+
+		<param name="kld_err" value="0.05"/>			  <!-- Max error between true dist and the estimated dist. -->
+		<param name="kld_z" value="0.99"/>			  <!-- low odometry noise expected for sim enviroment -->
 		
+		<!-- odom_alpha1 through odom_alpha4 are used for differential drive, odom_alpha5 is not -->
+		<!-- https://answers.ros.org/question/227811/tuning-amcls-diff-corrected-and-omni-corrected-odom-models/ -->
+		<!-- https://github.com/ros-planning/navigation/blob/jade-devel/amcl/test/texas_willow_hallway_loop_corrected.xml -->
+		<param name="odom_alpha1" value="0.04"/>	  <!-- low odometry noise expected for sim enviroment --> 
+    		<param name="odom_alpha2" value="0.6"/>		  <!-- low odometry noise expected for sim enviroment -->
+    		<param name="odom_alpha3" value="0.3"/>		  <!-- low odometry noise expected for sim enviroment -->
+    		<param name="odom_alpha4" value="0.04"/>		  <!-- low odometry noise expected for sim enviroment -->
+
+
+		<!-- Filter Parameters -->
+		<param name="min_particles" value="50"/>
+		<param name="max_particles" value="1000"/>
+
+		<param name="update_min_d" value="0.2"/> 
+		<param name="update_min_a" value="0.5"/>	
+		
+		<param name="transform_tolerance" value="0.2"/>
 
 		<!-- Laser Parameters -->
 		<param name="laser_min_range" value="0.1"/>
 		<param name="laser_max_range" value="30"/>		
-		<param name="laser_max_beams" value="30"/>	
-		<param name="laser_z_hit" value="0.95"/>		
+		<param name="laser_max_beams" value="50"/>	
+                <param name="laser_z_hit" value="0.95"/>		
 		<param name="laser_z_rand" value="0.05"/>
+   <!-- <param name="laser_sigma_hit" value="0.10"/>	--> <!-- high sigma_hit gives higher measurement noise --> 
+   <!--  <param name="laser_likelihood_max_dist" value="5.0"/> -->	<!-- max distance to do obstacle avoidance -->
 
 
  	</node>
+
+
 
 </launch>
