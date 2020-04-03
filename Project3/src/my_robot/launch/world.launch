@@ -3,34 +3,9 @@
 <launch>
 
  <!-- Robot pose -->
-  
-  <!-->
-  main hall
-  <arg name="x" default="1"/>
-  <arg name="y" default="-5"/>
-  <arg name="yaw" default="1.57"/>
-  -->
-
-  <!-- 
-  bottom right room 
-  <arg name="x" default="-1"/>
-  <arg name="y" default="-5"/>
-  <arg name="yaw" default="1.57"/>
-  -->
-
- 
-  <!-->
-  <arg name="x" default="-1"/>
-  <arg name="y" default="4"/>
-  <arg name="yaw" default="1.57"/>
-  -->
-  
-  
   <arg name="x" default="0"/>
   <arg name="y" default="0"/>
   <arg name="yaw" default="0"/>
-  
-
   <arg name="z" default="0"/>
   <arg name="roll" default="0"/>
   <arg name="pitch" default="0"/>
@@ -40,13 +15,7 @@
   <include file="$(find my_robot)/launch/robot_description.launch"/>
 
   <!-- World File -->
-     <!-- <arg name="world_file" default="$(find my_robot)/worlds/myWorld.world"/> --> 
-  <!-- <arg name="world_file" default="$(find my_robot)/worlds/udacity_mtv"/> -->
-    <!--  <arg name="world_file" default="$(find my_robot)/worlds/buildmyworld"/> -->
-    <!-- <arg name="world_file" default="$(find my_robot)/worlds/testworld"/> -->
-	<!-- <arg name="world_file" default="$(find my_robot)/worlds/evaWorld"/> -->
-
-	<arg name="world_file" default="$(find my_robot)/worlds/building"/>
+  <arg name="world_file" default="$(find my_robot)/worlds/building"/>
 
   <!-- Launch Gazebo World -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -64,10 +33,7 @@
               -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>  
 
   <!--launch rviz-->
-  <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find my_robot)/WhereAmI.rviz"/>
-
-
-
+  <node name="rviz" pkg="rviz" type="rviz" respawn="false"/>  <!-- args="-d $(find my_robot)/WhereAmI.rviz"-->
 
 
 </launch>

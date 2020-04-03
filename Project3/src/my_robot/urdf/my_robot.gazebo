@@ -96,8 +96,6 @@
     </sensor>
   </gazebo>
 
-  <gazebo reference="post_FL_visual">
-    <material>Gazebo/Blue</material>
-  </gazebo>
+
 
 </robot>
