@@ -20,7 +20,7 @@ A lab assignemnt to learn about Kalman filters, and integrating several ROS pack
 * `rviz` to visualize the unfiltered and filtered trajectory of the robot
 
 ### Project 3 - Where Am I?
-To be completed.
+Used the ROS `amcl` and `move_base` packages to localize a robot (from Project 2) in a map and navigate through a Gazebo world. The `amcl` node uses the Adaptive Monte Carlo Localization method, which uses a particle filter to track the pose of the robot against a known map.
 
 ## Install
 Clone the repo to your machine:

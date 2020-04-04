@@ -12,7 +12,7 @@ The robot can optionally be teleoperated using the `ros_teleop` package
 **Shown above:** The robot navigates through some narrow doors to its goal position. The ROS navigation stack plans a global trajectory from start to goal pose (green line). A local planner ([base_local_planner](http://wiki.ros.org/base_local_planner)) creates a local plan to follow the global trajectory while avoiding obstacles. The local planning algorithm creates a grid around the robot and maps the global path onto this area. This is best visualized as the robots passes through doors. Several local trajectories are generated and ranked against a tunable cost function and the trajectory with the lowest (best) cost is used.
 
 ## Install and Usage
-These instructions assume that the entire repo has been cloned. If not, refer to the repo README [here](https://github.com/SagarSaxena/Robotics-Nano-Degree/blob/master/Project1/README.md).
+These instructions assume that the entire repo has been cloned. If not, refer to the repo README [here](https://github.com/SagarSaxena/Robotics-Nano-Degree/blob/master/README.md).
 
 Then, open a terminal, navigate to the Project3 directory, source the setup script, and launch `world.launch`
 ```
