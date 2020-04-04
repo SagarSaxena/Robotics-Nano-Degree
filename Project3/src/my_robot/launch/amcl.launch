@@ -3,15 +3,10 @@
 <launch>
 
 	<!-- Map Server -->
-	<!-- <arg name="map_file" default="$(find my_robot)/maps/map.yaml"/> -->
-	<!-- <arg name="map_file" default="$(find my_robot)/maps/map_good.yaml"/> -->
-	<!--  <arg name="map_file" default="$(find my_robot)/maps/map_eva.yaml"/> -->
-	<!-- <arg name="map_file" default="$(find my_robot)/maps/map_testworld.yaml"/> -->
-	 <!-- <arg name="map_file" default="$(find my_robot)/maps/buildmyworld.yaml"/> --> 
+> 
 	<!-- <arg name="map_file" default="$(find my_robot)/maps/map_udacity.yaml"/> -->
 	<arg name="map_file" default="$(find my_robot)/maps/building.yaml"/> -->
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
-
 
 	 <!-- AMCL Node -->
   	<node name="amcl" pkg="amcl" type="amcl" output="screen">
@@ -31,20 +26,19 @@
 		<param name="kld_z" value="0.99"/>			 
 		
 		<!-- odom_alpha1 through odom_alpha4 are used for differential drive, odom_alpha5 is not -->
-		<!-- https://answers.ros.org/question/227811/tuning-amcls-diff-corrected-and-omni-corrected-odom-models/ -->
-		<!-- https://github.com/ros-planning/navigation/blob/jade-devel/amcl/test/texas_willow_hallway_loop_corrected.xml -->
-		<param name="odom_alpha1" value="0.0"/>	  <!-- low odometry noise expected for sim enviroment --> 
-    		<param name="odom_alpha2" value="0.0"/>		  <!-- low odometry noise expected for sim enviroment -->
-    		<param name="odom_alpha3" value="0.0"/>		  <!-- low odometry noise expected for sim enviroment -->
-    		<param name="odom_alpha4" value="0.0"/>		  <!-- low odometry noise expected for sim enviroment -->
+		<!-- Reference: http://kaiyuzheng.me/documents/navguide.pdf -->
+		<param name="odom_alpha1" value="0.005"/>	  
+    		<param name="odom_alpha2" value="0.005"/>		  
+    		<param name="odom_alpha3" value="0.005"/>		  
+    		<param name="odom_alpha4" value="0.005"/>		  
 
 
 		<!-- Filter Parameters -->
 		<param name="min_particles" value="100"/>
 		<param name="max_particles" value="500"/>
 
-		<param name="update_min_d" value="0.1"/> 
-		<param name="update_min_a" value="M_PI/16.0"/>	
+		<param name="update_min_d" value="0.2"/>  
+		<param name="update_min_a" value="0.5"/>
 		
 		<param name="transform_tolerance" value="0.3"/>
 
@@ -53,7 +47,7 @@
 		<param name="laser_max_range" value="30"/>		
 		<param name="laser_max_beams" value="30"/>	
                 <param name="laser_z_hit" value="0.95"/>		
-		<param name="laser_z_rand" value="0.00"/>
+		<param name="laser_z_rand" value="0.01"/>
 
  	</node>
 
