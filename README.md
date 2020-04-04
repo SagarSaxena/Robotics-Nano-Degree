@@ -7,7 +7,7 @@ This repo contains completed labs and projects from the [Udacity Robotics Softwa
 A 3D model of my apartment made in Gazebo along with a simple robot model. A Gazebo script written in C++ displays a welcome message to the terminal and another script drives one of the robots in a straight line.
 
 ### Project 2 - Go Chase It!
-Modelled a more advanced robot model that has a LIDAR and camera sensor and housed it in the world model from project 1. Wrote two ROS packages:
+Models a more advanced robot model that has a LIDAR and camera sensor and houses it in the world model from project 1. Wrote two ROS packages:
 * `drive_bot`: Holds the robot and world models, with gazebo plugins for the LIDAR, camera, and differenial drive for the robot.
 * `ball_chaser`: provides a service to drive the robot towards a white ball that can be repositioned throughout the environment
 
@@ -20,7 +20,7 @@ A lab assignemnt to learn about Kalman filters, and integrating several ROS pack
 * `rviz` to visualize the unfiltered and filtered trajectory of the robot
 
 ### Project 3 - Where Am I?
-Used the ROS `amcl` and `move_base` packages to localize a robot (from Project 2) in a map and navigate through a Gazebo world. The `amcl` node uses the Adaptive Monte Carlo Localization method, which uses a particle filter to track the pose of the robot against a known map.
+Uses the ROS `amcl` and `move_base` packages to localize a robot (from Project 2) in a map and navigate through a Gazebo world. The `amcl` node uses the Adaptive Monte Carlo Localization method, which uses a particle filter to track the pose of the robot against a known map.
 
 ## Install
 Clone the repo to your machine:

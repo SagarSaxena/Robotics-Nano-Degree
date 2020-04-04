@@ -1,6 +1,7 @@
 # Project 1 - Build My World
 
 ## Install
+These instructions assume that the entire repo has been cloned. If not, refer to the repo README [here](https://github.com/SagarSaxena/Robotics-Nano-Degree/blob/master/README.md).
 
 The build directory is already included in the repo, so the code does not need to be compiled again.
 
