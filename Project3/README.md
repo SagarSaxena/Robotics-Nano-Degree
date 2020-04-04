@@ -1,7 +1,7 @@
 # Project 3 - Where Am I?
 
 ## Description
-![Where Am I? demo](WhereAmI_demo1.gif)
+![Where Am I? demo](WhereAmI_Demo1.gif)
 
 
 ## Install
