@@ -1,5 +1,8 @@
 # Project 1 - Build My World
 
+![Gazebo world](image/myWorld.jpg)
+**Shown above:** A Gazebo world modelled after my apartment.
+
 ## Install
 These instructions assume that the entire repo has been cloned. If not, refer to the repo README [here](https://github.com/SagarSaxena/Robotics-Nano-Degree/blob/master/README.md).
 
