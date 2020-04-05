@@ -1,6 +1,6 @@
 # Project 1 - Build My World
 
-![Gazebo world](image/myapartment.png)
+![Gazebo world](/image/myapartment.png?raw=true)  
 **Shown above:** A Gazebo world modelled after my apartment.
 
 ## Install
