@@ -11,12 +11,19 @@ The robot can optionally be teleoperated using the `ros_teleop` package
 ![Where Am I? demo](GIF/WhereAmI_Demo3.gif)
 **Shown above:** The robot navigates through some narrow doors to its goal position. The ROS navigation stack plans a global trajectory from start to goal pose (green line). A local planner ([base_local_planner](http://wiki.ros.org/base_local_planner)) creates a local plan to follow the global trajectory while avoiding obstacles. The local planning algorithm creates a grid around the robot and maps the global path onto this area. This is best visualized as the robots passes through doors. Several local trajectories are generated and ranked against a tunable cost function and the trajectory with the lowest (best) cost is used.
 
-## Install and Usage
+## Install
 These instructions assume that the entire repo has been cloned. If not, refer to the repo README [here](https://github.com/SagarSaxena/Robotics-Nano-Degree/blob/master/README.md).
 
-Then, open a terminal, navigate to the Project3 directory, source the setup script, and launch `world.launch`
+Open a terminal and make the project:
 ```
-$ cd ~/RoboNDProjects/Project3
+$ cd ~/Robotics-Nano-Degree/Project3
+$ catkin_make
+```
+
+## Usage
+Open a terminal, source the setup script, and launch `world.launch`
+```
+$ cd ~/Robotics-Nano-Degree/Project3
 $ source devel/setup.bash 
 $ roslaunch my_robot world.launch
 ```
@@ -24,7 +31,7 @@ This will launch the Gazebo world and an Rviz configuration.
 
 In another terminal, launch `amcl.launch`
 ```
-$ cd ~/RoboNDProjects/Project3
+$ cd ~/Robotics-Nano-Degree/Project3
 $ source devel/setup.bash 
 $ roslaunch my_robot amcl.launch
 ```
@@ -33,7 +40,7 @@ To move the robot using the ROS navigation stack select "2D Nav Goal" in Rviz an
 
 To instead move the robot using teleop, clone the `ros-teleop` package to the `src` folder
 ```
-$ cd ~/RoboNDProjects/Project3/src
+$ cd ~/Robotics-Nano-Degree/Project3/src
 $ git clone https://github.com/ros-teleop/teleop_twist_keyboard
 ```
 

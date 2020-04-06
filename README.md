@@ -6,14 +6,14 @@ This repo contains completed labs and projects from the [Udacity Robotics Softwa
 ### Project 1 - Build My World
 A 3D model of my apartment made in Gazebo along with a simple robot model. A Gazebo script written in C++ displays a welcome message to the terminal and another script drives one of the robots in a straight line.
 
-For more details see the project1 [README](https://github.com/SagarSaxena/Robotics-Nano-Degree/tree/master/Project1)
+For more details see the Project1 [README](https://github.com/SagarSaxena/Robotics-Nano-Degree/tree/master/Project1)
 
 ### Project 2 - Go Chase It!
-Models a more advanced robot model that has a LIDAR and camera sensor and houses it in the world model from project 1. Wrote two ROS packages:
+Models a more advanced robot model that has a LIDAR and camera sensor and houses it in the world model from project 1. Implements two ROS packages:
 * `drive_bot`: Holds the robot and world models, with gazebo plugins for the LIDAR, camera, and differenial drive for the robot.
 * `ball_chaser`: provides a service to drive the robot towards a white ball that can be repositioned throughout the environment
 
-For more details see the project2 [README](https://github.com/SagarSaxena/Robotics-Nano-Degree/tree/master/Project2)
+For more details see the Project2 [README](https://github.com/SagarSaxena/Robotics-Nano-Degree/tree/master/Project2)
 
 ### Lab: Kalman Filter
 A lab assignemnt to learn about Kalman filters, and integrating several ROS packages:
@@ -23,10 +23,12 @@ A lab assignemnt to learn about Kalman filters, and integrating several ROS pack
 * `turtlebot_teleop` to drive the robot using keyboard commands
 * `rviz` to visualize the unfiltered and filtered trajectory of the robot
 
+For more details see the KalmanFilter [README](https://github.com/SagarSaxena/Robotics-Nano-Degree/tree/master/KalmanFilter)
+
 ### Project 3 - Where Am I?
 Uses the ROS `amcl` and `move_base` packages to localize a robot (from Project 2) in a map and navigate through a Gazebo world. The `amcl` node uses the Adaptive Monte Carlo Localization method, which uses a particle filter to track the pose of the robot against a known map.
 
-For more details see the project3 [README](https://github.com/SagarSaxena/Robotics-Nano-Degree/tree/master/Project3)
+For more details see the Project3 [README](https://github.com/SagarSaxena/Robotics-Nano-Degree/tree/master/Project3)
 
 ## Install
 Clone the repo to your machine:

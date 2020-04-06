@@ -11,7 +11,7 @@ The build directory is already included in the repo, so the code does not need t
 
 If the build directory was deleted or not cloned with the repo, create one:
 ```
-$ cd ~/RoboNDProjects/Project1
+$ cd ~/Robotics-Nano-Degree/Project1
 $ mkdir build
 $ cd build/
 $ cmake ../
@@ -25,7 +25,7 @@ Export the path of your build directory
 
 Navigate to the world directory and launch `myWorld`:
 ```
-$ cd ~/RoboNDProjects/Project1/world/
+$ cd ~/Robotics-Nano-Degree/Project1/world/
 $ gazebo myWorld
 ```
 A gazebo world modelled after my apartment will launch, with some robots scattered through out the environment.
