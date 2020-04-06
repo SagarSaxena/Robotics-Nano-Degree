@@ -21,7 +21,9 @@ $ make
 ## Usage
 
 Export the path of your build directory
-`$ export GAZEBO_PLUGIN_PATH=${GAZEBO_PLUGIN_PATH}:/home/robond/RoboNDProjects/Project1/build`
+```
+$ export GAZEBO_PLUGIN_PATH=${GAZEBO_PLUGIN_PATH}:/home/robond/RoboNDProjects/Project1/build
+```
 
 Navigate to the world directory and launch `myWorld`:
 ```

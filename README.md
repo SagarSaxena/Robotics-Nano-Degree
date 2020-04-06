@@ -1,6 +1,13 @@
 # Robotics Software Engineer Nanodegree
 This repo contains completed labs and projects from the [Udacity Robotics Software Engineer Nanodegree](https://www.udacity.com/course/robotics-software-engineer--nd209). Each sub folder is a lab or project from the course, described below.
 
+## Install
+Clone the repo to your machine:
+```
+$ git clone https://github.com/SagarSaxena/Robotics-Nano-Degree.git
+```
+To run individual projects/labs refer to the install/usage section in the respective folder's README.
+
 ## Projects
 
 ### Project 1 - Build My World
@@ -29,13 +36,6 @@ For more details see the KalmanFilter [README](https://github.com/SagarSaxena/Ro
 Uses the ROS `amcl` and `move_base` packages to localize a robot (from Project 2) in a map and navigate through a Gazebo world. The `amcl` node uses the Adaptive Monte Carlo Localization method, which uses a particle filter to track the pose of the robot against a known map.
 
 For more details see the Project3 [README](https://github.com/SagarSaxena/Robotics-Nano-Degree/tree/master/Project3)
-
-## Install
-Clone the repo to your machine:
-```
-$ git clone https://github.com/SagarSaxena/Robotics-Nano-Degree.git
-```
-To run individual projects/labs refer to the install/usage section in the respective folder's README.
 
 ## Dependencies
 All projects/labs used ROS Kinetic, they have not been tested on other distros.

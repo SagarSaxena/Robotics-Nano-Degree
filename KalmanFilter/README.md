@@ -48,13 +48,14 @@ This will launch the Gazebo world and an Rviz configuration.
 You can move the turtlebot around from the same terminal per the `turtlebot_teleop` documentation:
 
 Moving around:
-i / ' : up / down
-j / l : left / right
-u / . : up-left / down-right (diagonals)
-o / m : up-right / down-left (diagonals)
+* i / ' : up / down
+* j / l : left / right
+* u / . : up-left / down-right (diagonals)
+* o / m : up-right / down-left (diagonals)
 
-q/z : increase/decrease max speeds by 10%
-w/x : increase/decrease only linear speed by 10%
-e/c : increase/decrease only angular speed by 10%
-space key, k : force stop
-anything else : stop smoothly
+Velocity:
+* q/z : increase/decrease max speeds by 10%
+* w/x : increase/decrease only linear speed by 10%
+* e/c : increase/decrease only angular speed by 10%
+* space key, k : force stop
+* anything else : stop smoothly
