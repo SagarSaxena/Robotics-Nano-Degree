@@ -51,8 +51,27 @@
       <!-- Minimum visual inliers to accept loop closure -->
       <param name="Vis/MinInliers" type="string" value="15"/>
 
+
+
       <!-- Set to false to avoid saving data when robot is not moving -->
       <param name="Mem/NotLinkedNodesKept" type="string" value="false"/>
+
+
+
+      <!-- ADDED PARAMETERS -->
+
+       
+
+      <!-- <param name="Vis/FeatureType" type="string" value="0"/> -->
+
+      <!-- https://answers.ros.org/question/271481/rtabmap-issue-with-loop-closure/ -->
+      <param name="RGBD/OptimizeMaxError"                type="double"      value="0.1"  />
+
+      <!-- <param name="RGBD/LoopClosureReextractFeatures" type="string" value="true"/> --> <!-- optional but more loop closures would be accepted -->
+
+      
+
+
     </node>
   </group>
 </launch>
