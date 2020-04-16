@@ -16,6 +16,19 @@ Install the RTAB-Map binary:
 sudo apt-get install ros-kinetic-rtabmap-ros
 ```
 
+In the source directory clone the teleop-twist package
+```
+cd ~/Robotics-Nano-Degree/Project4/src
+git clone https://github.com/ros-teleop/teleop_twist_keyboard
+```
+
+Compile the project:
+```
+cd ~/Robotics-Nano-Degree/Project4
+catkin_make
+```
+
+
 ## Launch
 
 Open a terminal and lauch the world:
