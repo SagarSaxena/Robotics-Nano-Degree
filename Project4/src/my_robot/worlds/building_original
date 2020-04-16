@@ -110,7 +110,13 @@
               <size>16.25 0.15 2.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -148,7 +154,13 @@
               <size>1.25 0.15 2.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -166,7 +178,13 @@
               <size>2.04153 0.15 2.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -199,7 +217,13 @@
               <size>6.70847 0.15 1</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -232,7 +256,13 @@
               <size>2.22945 0.15 1.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -265,7 +295,13 @@
               <size>1.47902 0.15 1.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -298,7 +334,13 @@
               <size>1.5 0.15 0.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -331,7 +373,13 @@
               <size>1.5 0.15 0.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -389,7 +437,13 @@
               <size>16.25 0.15 2.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -407,7 +461,13 @@
               <size>2.70884 0.15 2.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -440,7 +500,13 @@
               <size>11.6058 0.15 2.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -473,7 +539,13 @@
               <size>7.63321 0.15 1</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -506,7 +578,13 @@
               <size>5.07321 0.15 1.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -539,7 +617,13 @@
               <size>2.56 0.15 0.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -572,7 +656,13 @@
               <size>3.05215 0.15 0.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
@@ -630,7 +720,13 @@
               <size>15.1513 0.15 2.5</size>
             </box>
           </geometry>
-
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Bricks</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
           <meta>
             <layer>0</layer>
           </meta>
