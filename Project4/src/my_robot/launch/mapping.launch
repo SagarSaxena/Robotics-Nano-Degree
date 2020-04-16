@@ -41,6 +41,10 @@
       <!-- Maximum visual words per image (bag-of-words) -->
       <param name="Kp/MaxFeatures" type="string" value="400"/>
 
+      <!-- Disable loop closures (for testing) -->
+      <!-- <param name="Kp/MaxFeatures" type="string" value="-1"/> -->
+
+
       <!-- Used to extract more or less SURF features -->
       <param name="SURF/HessianThreshold" type="string" value="100"/>
 
@@ -49,7 +53,7 @@
       <param name="Reg/Strategy" type="string" value="0"/>
 
       <!-- Minimum visual inliers to accept loop closure -->
-      <param name="Vis/MinInliers" type="string" value="15"/>
+      <param name="Vis/MinInliers" type="string" value="20"/>
 
 
 
@@ -60,14 +64,16 @@
 
       <!-- ADDED PARAMETERS -->
 
-       
+      <param name="Grid/FromDepth" type="string" value="false"/>
 
-      <!-- <param name="Vis/FeatureType" type="string" value="0"/> -->
+      <param name="Vis/FeatureType" type="string" value="0"/> 
 
       <!-- https://answers.ros.org/question/271481/rtabmap-issue-with-loop-closure/ -->
-      <param name="RGBD/OptimizeMaxError"                type="double"      value="0.1"  />
+      <!-- <param name="RGBD/OptimizeMaxError"                type="double"      value="0"  /> -->
 
-      <!-- <param name="RGBD/LoopClosureReextractFeatures" type="string" value="true"/> --> <!-- optional but more loop closures would be accepted -->
+      <!-- <param name="Vis/MapDepth" type="string" value="3.5"/> -->
+
+      <param name="RGBD/LoopClosureReextractFeatures" type="string" value="true"/> <!-- optional but more loop closures would be accepted -->
 
       
 
