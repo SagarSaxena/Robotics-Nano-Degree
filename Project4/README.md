@@ -14,7 +14,7 @@ RTAB-Map uses a process called loop closure to determine if the robot has seen a
 **Shown above:** The generated occupancy grid map (left) versus a top view of the gazebo world.
 
 ![LoopClosure](img/Loopclosure.JPG)
-**Shown above:** The database file viewed in teh RTABmap database viewer. In the graph view (left) the robot trajectory can be seen as well as 6 loop closures.
+**Shown above:** The database file viewed in the RTABmap database viewer. In the graph view (left) the robot trajectory can be seen as well as 6 loop closures.
 
 ![3Dmaps](img/3Dvsgazebo.JPG)
 **Shown above:** The generated 3D map (left) versus gazebo world (right). The same features can clearly be identified in both. Gaps in the 3D map are due to the robot not "looking" in that direction for long enough or at a close enough distance.
