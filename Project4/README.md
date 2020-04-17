@@ -6,14 +6,14 @@ In this project Simultaneous Localization and Mapping (SLAM) is simulated using 
 
 RTAB-Map uses a process called loop closure to determine if the robot has seen a location before. Loop closure typicaly results in much smoother maps and prevents the same features being registered as new ones. The feature detection and comparison used in loop closure uses the Visual Bag-of-Words technique. RTAB-Map is able to test loop closure in real time by using a memory management - the most recent and fequently observed location are kept in Working Memory (WM) of fixed size, and the others are trasnfered into Long-Term Memory (LTM). Loop closure is done only on WM making the time complexity of RTAB-Map constant (image below from Udacity Robotics Software NanoDegree).
 
- ![LinearTime](img/memory management.JPG)
+ ![LinearTime](img/memorymanagement.JPG)
 
 ## Results
 
 ![Occupancygridmap](img/maps.JPG)
 **Shown above:** The generated occupancy grid map (left) versus a top view of the gazebo world.
 
-![3Dmaps](img/3D vs gazebo.JPG)
+![3Dmaps](img/3Dvsgazebo.JPG)
 **Shown above:** The generated 3D map (left) versus gazebo world (right). The same features can clearly be identified in both. Gaps in the 3D map are due to the robot not "looking" in that direction for long enough or at a close enough distance.
 
 The database file can be downloaded [here](https://drive.google.com/file/d/1cTToWuMNFxYuCTSdDx6bDi9gL-te_gg-/view?usp=sharing)
