@@ -1,0 +1,15 @@
+# Project 5 - Home Service Robot
+
+## Description
+
+## Results
+
+## Install
+
+## Launch
+```
+$ cd ~/Robotics-Nano-Degree/Project5/
+$ source devel/setup.bash
+$ ./test_slam.sh
+```
+
