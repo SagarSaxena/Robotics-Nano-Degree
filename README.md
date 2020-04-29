@@ -37,5 +37,10 @@ Uses the ROS `amcl` and `move_base` packages to localize a robot (from Project 2
 
 For more details see the Project3 [README](https://github.com/SagarSaxena/Robotics-Nano-Degree/tree/master/Project3)
 
+### Project 4 - Map My World
+Uses the [rtabmap_ros](http://wiki.ros.org/rtabmap_ros) package to implement Simultaneous Localization and Mapping (SLAM) of a simulated environment. RTAB-Map stands for Real Time Appearance Based Mapping, which is an implementation of the GraphSLAM algorithm that uses vision sensors.
+
+For more details see the Project4 [README](https://github.com/SagarSaxena/Robotics-Nano-Degree/tree/master/Project4)
+
 ## Dependencies
 All projects/labs used ROS Kinetic, they have not been tested on other distros.

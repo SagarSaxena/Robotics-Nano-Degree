@@ -10,3 +10,6 @@
 [submodule "Project5/src/turtlebot_simulator"]
 	path = Project5/src/turtlebot_simulator
 	url = https://github.com/turtlebot/turtlebot_simulator.git
+[submodule "Project5/src/teleop_twist_keyboard"]
+	path = Project5/src/teleop_twist_keyboard
+	url = https://github.com/ros-teleop/teleop_twist_keyboard.git
