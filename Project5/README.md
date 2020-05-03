@@ -7,7 +7,7 @@
 ## Install
 ```
 $ git clone https://github.com/SagarSaxena/Robotics-Nano-Degree.git
-
+```
 
 
 ## Generating a Map
