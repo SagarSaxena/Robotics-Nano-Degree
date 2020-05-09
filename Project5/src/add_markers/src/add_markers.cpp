@@ -1,5 +1,34 @@
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
+#include <nav_msgs/Odometry.h>
+
+
+// Create class that has callback function as one of its member functions and goalReached as one of its member variables
+// this way can just check member variable from main
+
+class OdomSubscriber {
+  public:
+    OdomSubscriber() {
+      // Subscribe to /odom topic 
+      sub1_ = n_.subscribe("/odom", 10, &OdomSubscriber::odomCallback, this);
+
+      goalReached = false;
+    }
+    
+    bool isGoalReached () {
+       return goalReached;
+    }
+
+    void odomCallback (const nav_msgs::Odometry::ConstPtr& msg) {
+       ROS_INFO("entered callback");
+       // if odom matches goal position set goal reached to true
+    }
+
+  private:
+    ros::NodeHandle n_; 
+    ros::Subscriber sub1_;
+    bool goalReached;
+};
 
 int main( int argc, char** argv )
 {
@@ -7,6 +36,9 @@ int main( int argc, char** argv )
   ros::NodeHandle n;
   ros::Rate r(1);
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+
+  //instantiate subscriber to listen to /odom topic
+  OdomSubscriber odom_sub;
 
   // Set our initial shape type to be a cube
   uint32_t shape = visualization_msgs::Marker::CUBE;
@@ -62,6 +94,9 @@ int main( int argc, char** argv )
       sleep(1);
     }
     marker_pub.publish(marker);
+
+    // Handle ROS communication events (non-blocking)
+    ros::spinOnce();
 
     r.sleep();
   }
