@@ -20,7 +20,7 @@ class AMCLPoseSubscriber {
        return goalReached;
     }
 
-    void setGoalPose (float x, float y) {
+    void setGoalPos (float x, float y) {
       xGoal = x;
       yGoal = y;
       goalReached = false;      
@@ -54,16 +54,17 @@ int main( int argc, char** argv )
   ros::Rate r(1);
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
+  // initialize goal positions
+  float goalPose[2][3] = {{-1, 1.75, 0}, {-0.75, -3.5, 1.57}};
+  int numGoals = 2; 
+
   //instantiate subscriber to listen to /odom topic
   AMCLPoseSubscriber AMCLPose_sub;
-
-  AMCLPose_sub.setGoalPose(-1,1.75);
 
   // Set our initial shape type to be a cube
   uint32_t shape = visualization_msgs::Marker::CUBE;
 
-  while (ros::ok())
-  {
+  // Set marker parameters
     visualization_msgs::Marker marker;
     // Set the frame ID and timestamp.  See the TF tutorials for information on these.
     marker.header.frame_id = "map";
@@ -77,18 +78,6 @@ int main( int argc, char** argv )
     // Set the marker type.  Initially this is CUBE, and cycles between that and SPHERE, ARROW, and CYLINDER
     marker.type = shape;
 
-    // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
-    marker.action = visualization_msgs::Marker::ADD;
-
-    // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
-    marker.pose.position.x = -1;
-    marker.pose.position.y = 1.75;
-    marker.pose.position.z = 0;
-    marker.pose.orientation.x = 0.0;
-    marker.pose.orientation.y = 0.0;
-    marker.pose.orientation.z = 0.0;
-    marker.pose.orientation.w = 1.0;
-
     // Set the scale of the marker -- 1x1x1 here means 1m on a side
     marker.scale.x = 0.2;
     marker.scale.y = 0.2;
@@ -100,23 +89,61 @@ int main( int argc, char** argv )
     marker.color.b = 0.0f;
     marker.color.a = 1.0;
 
+    marker.pose.position.z = 0;
+    marker.pose.orientation.x = 0.0;
+    marker.pose.orientation.y = 0.0;
+    marker.pose.orientation.z = 0.0;
+    marker.pose.orientation.w = 1.0;
+
+    // Do not autodelete marker
     marker.lifetime = ros::Duration();
 
-    // Publish the marker
-    while (marker_pub.getNumSubscribers() < 1)
-    {
-      if (!ros::ok())
-      {
-        return 0;
-      }
-      ROS_WARN_ONCE("Please create a subscriber to the marker");
-      sleep(1);
+
+  // FIRST GOAL POSITION (PICKUP)
+
+    AMCLPose_sub.setGoalPos(goalPose[0][0], goalPose[0][1]);
+
+    // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
+    marker.pose.position.x = goalPose[0][0];
+    marker.pose.position.y = goalPose[0][1];
+
+    // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
+    marker.action = visualization_msgs::Marker::ADD;
+
+    while (!AMCLPose_sub.isGoalReached()) {
+      marker_pub.publish(marker);
+
+      // Handle ROS communication events (non-blocking)
+      ros::spinOnce();
+
+      r.sleep();
     }
+
+    //delete marker (simulate pick up)
+    marker.action = visualization_msgs::Marker::DELETE;
     marker_pub.publish(marker);
 
-    // Handle ROS communication events (non-blocking)
-    ros::spinOnce();
+  // SECOND GOAL POSITION (DROPOFF)
 
-    r.sleep();
-  }
+    AMCLPose_sub.setGoalPos(goalPose[1][0], goalPose[1][1]);
+
+    // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
+    marker.pose.position.x = goalPose[1][0];
+    marker.pose.position.y = goalPose[1][1];
+
+    while (!AMCLPose_sub.isGoalReached()) {
+      // Handle ROS communication events (non-blocking)
+      ros::spinOnce();
+
+      r.sleep();
+    }
+
+    // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
+    marker.action = visualization_msgs::Marker::ADD;
+
+    // Display marker (drop off)
+    while (ros::ok()) {
+      marker_pub.publish(marker);
+    }
+
 }
