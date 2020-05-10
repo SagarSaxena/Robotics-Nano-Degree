@@ -1,33 +1,50 @@
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
-#include <nav_msgs/Odometry.h>
+//#include <nav_msgs/Odometry.h>
+#include <geometry_msgs/PoseWithCovarianceStamped.h>
 
 
 // Create class that has callback function as one of its member functions and goalReached as one of its member variables
 // this way can just check member variable from main
 
-class OdomSubscriber {
+class AMCLPoseSubscriber {
   public:
-    OdomSubscriber() {
-      // Subscribe to /odom topic 
-      sub1_ = n_.subscribe("/odom", 10, &OdomSubscriber::odomCallback, this);
-
+    AMCLPoseSubscriber() {
+      // Subscribe to /amcl_pose topic 
+      sub1_ = n_.subscribe("/amcl_pose", 10, &AMCLPoseSubscriber::AMCLPoseCallback, this);
       goalReached = false;
+      goalZoneLinTol = 0.2;
     }
     
     bool isGoalReached () {
        return goalReached;
     }
 
-    void odomCallback (const nav_msgs::Odometry::ConstPtr& msg) {
-       ROS_INFO("entered callback");
-       // if odom matches goal position set goal reached to true
+    void setGoalPose (float x, float y) {
+      xGoal = x;
+      yGoal = y;
+      goalReached = false;      
+    }
+
+    void AMCLPoseCallback (const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg) {
+      float xCurr = msg->pose.pose.position.x;
+      float yCurr = msg->pose.pose.position.y;
+
+      if ( (xCurr >= (xGoal - goalZoneLinTol) ) && (xCurr <= (xGoal + goalZoneLinTol) )
+           && (yCurr >= (yGoal - goalZoneLinTol) ) && (yCurr <= (yGoal + goalZoneLinTol) )  
+             && goalReached == false ) {
+        goalReached = true;
+        ROS_INFO("Goal reached");
+      } 
     }
 
   private:
     ros::NodeHandle n_; 
     ros::Subscriber sub1_;
     bool goalReached;
+    float xGoal;
+    float yGoal;
+    float goalZoneLinTol; 
 };
 
 int main( int argc, char** argv )
@@ -38,7 +55,9 @@ int main( int argc, char** argv )
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
   //instantiate subscriber to listen to /odom topic
-  OdomSubscriber odom_sub;
+  AMCLPoseSubscriber AMCLPose_sub;
+
+  AMCLPose_sub.setGoalPose(-1,1.75);
 
   // Set our initial shape type to be a cube
   uint32_t shape = visualization_msgs::Marker::CUBE;
